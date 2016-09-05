@@ -22,7 +22,7 @@ module TimeAPI
         allow do
           origins '*'
 
-          resource '/public/*',
+          resource '*',
             methods: [:get],
             max_age: 600
         end
@@ -140,7 +140,7 @@ module TimeAPI
       end
     end  
   
-  
+
     get '/' do
       erb :index
     end
