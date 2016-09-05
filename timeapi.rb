@@ -5,6 +5,7 @@ require 'date'
 require 'cgi'
 require 'json'
 require 'active_support/time'
+require 'rack/cors'
 
 ENV['RACK_ENV'] ||= "development"
 ENV['TIMEAPI_MIME'] ||= "text/plain"
@@ -16,6 +17,16 @@ module TimeAPI
     configure do 
       disable :sessions
       set :environment, ENV['RACK_ENV']
+
+      use Rack::Cors do
+        allow do
+          origins '*'
+
+          resource '/public/*',
+            methods: [:get],
+            max_age: 600
+        end
+      end
     end
 
     helpers do
